@@ -2,6 +2,7 @@ import './App.css';
 import { useState } from 'react';
 import ChuckCard from './components/chuck_card';
 import ChuckInfo from './components/chuck_info';
+import ChuckJoke from './components/chuck_joke';
 import Joke from './joke';
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
 		"id": 1,
 		"joke": "Chuck Norris doesn’t read books. He stares them down until he gets the information he wants.",
 	},
-	{
+	{	
 		"id": 2,
 		"joke": "Time waits for no man. Unless that man is Chuck Norris.",
 	},
@@ -25,20 +26,20 @@ function App() {
 		"id": 4,
 		"joke": "Chuck Norris does not own a stove, oven, or microwave, because revenge is a dish best served cold.",
 	}])
+	const jokeThree = jokes.find((joke: Joke)=> joke.id === 3);
 
 	return (
 		<div className="App">
-
-			<h1>React props and state</h1>
-			<ChuckCard />
-
-			<h2>Chuck Info: </h2>
-			<ChuckInfo />
-
+			<h1>React</h1>
+			<ChuckCard greeting={chuckGreeting} />
+			<ChuckInfo noOfWhales = {whalesSaved} noOfKicks={roundHouseKicks} />
 			<h2>Jokes: </h2>
-
+			{jokes.map((myJoke: Joke) => <ChuckJoke id = {myJoke.id} key = {(myJoke.id.toString())} joke = {myJoke.joke} />)}
+			<h2>Filtered Jokes: </h2>
+			{jokeThree? <ChuckJoke id = {jokeThree.id} key = {(jokeThree.id.toString())} joke = {jokeThree.joke} />: <p>joke not found</p>}
 		</div>
 	);
 }
 
 export default App;
+
